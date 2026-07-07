@@ -1,3 +1,6 @@
+---
+const base = import.meta.env.BASE_URL;
+---
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -7,7 +10,7 @@
   <script>
     const stored = localStorage.getItem("lang");
     const lang = (stored === "zh") ? "zh" : "en";
-    window.location.replace(window.location.origin + "/elwina/" + lang + "/");
+    window.location.replace("{base}" + lang + "/");
   </script>
 </head>
 <body></body>
