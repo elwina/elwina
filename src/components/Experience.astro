@@ -1,6 +1,16 @@
 ---
 import { siteConfig } from "../config";
-const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
+import { ui } from "../i18n/ui";
+import type { Lang } from "../i18n/utils";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const content = siteConfig[lang];
+const t = ui[lang].experience;
+const hasExperience = content.experience && content.experience.length > 0;
 ---
 
 {
@@ -10,7 +20,7 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
         <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-start">
           <div class="lg:col-span-4">
             <h2 class="text-3xl sm:text-4xl md:text-5xl xl:text-7xl font-bold text-gray-900">
-              Experience
+              {t.title}
             </h2>
             <div
               class="w-[75px] h-[5px] mt-2 rounded-full"
@@ -19,50 +29,22 @@ const hasExperience = siteConfig.experience && siteConfig.experience.length > 0;
           </div>
 
           <div class="lg:col-span-8">
-            <div class="relative">
-              {siteConfig.experience.map((exp, index) => (
-                <div class="relative mb-12 last:mb-0">
-                  {/* Timeline dot at top of card */}
-                  <div
-                    class="absolute left-1/2 -top-2 w-4 h-4 bg-white border-2 rounded-full -translate-x-1/2 z-20 transition-all duration-300"
-                    style={`border-color: ${siteConfig.accentColor}; background-color: ${siteConfig.accentColor}`}
-                  />
-
-                  {/* Connecting line below card */}
-                  {index < siteConfig.experience.length - 1 && (
-                    <div class="absolute left-1/2 bottom-0 w-0.5 h-12 bg-gray-300 -translate-x-1/2 translate-y-full z-10" />
-                  )}
-
-                  {/* Experience card */}
-                  <div class="bg-white rounded-lg shadow-sm border border-gray-100 p-4 sm:p-5 md:p-6 hover:shadow-md transition-shadow duration-300">
-                    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between mb-4">
-                      <div>
-                        <h3 class="text-lg sm:text-xl font-semibold text-gray-900">
-                          {exp.title}
-                        </h3>
-                        <p
-                          class="text-base sm:text-lg"
-                          style={`color: ${siteConfig.accentColor}`}
-                        >
-                          {exp.company}
-                        </p>
-                      </div>
-                      <span class="text-xs sm:text-sm text-gray-500 mt-2 sm:mt-0">
-                        {exp.dateRange}
-                      </span>
-                    </div>
-
-                    <ul class="space-y-2">
-                      {exp.bullets.map((bullet) => (
-                        <li class="flex items-start">
-                          <span class="inline-block w-1.5 h-1.5 rounded-full bg-gray-400 mt-2 mr-3 flex-shrink-0" />
-                          <span class="text-sm sm:text-base text-gray-600">
-                            {bullet}
-                          </span>
-                        </li>
-                      ))}
-                    </ul>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              {content.experience.map((act) => (
+                <div class="group bg-white rounded-lg border border-gray-100 p-5 hover:shadow-md hover:border-gray-200 transition-all duration-300">
+                  <div class="flex items-center gap-3 mb-2">
+                    <span
+                      class="text-xs font-mono font-bold px-2 py-0.5 rounded"
+                      style={`background-color: ${siteConfig.accentColor}15; color: ${siteConfig.accentColor}`}
+                    >
+                      {act.year}
+                    </span>
+                    <span class="text-xs text-gray-400">{act.location}</span>
                   </div>
+                  <p
+                    class="text-sm sm:text-base text-gray-700 leading-relaxed"
+                    set:html={act.event}
+                  />
                 </div>
               ))}
             </div>

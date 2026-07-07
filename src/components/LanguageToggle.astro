@@ -1,0 +1,36 @@
+---
+import { siteConfig } from "../config";
+import type { Lang } from "../i18n/utils";
+import { ui } from "../i18n/ui";
+
+interface Props {
+  lang: Lang;
+}
+
+const { lang } = Astro.props;
+const nextLang: Lang = lang === "en" ? "zh" : "en";
+const t = ui[lang].lang;
+---
+
+<div class="flex items-center gap-1.5">
+  <span class="text-sm font-medium text-gray-500">{t.label}</span>
+  <a
+    href={`/${nextLang}/`}
+    class="lang-btn text-sm px-3 py-1 rounded-full transition-colors duration-200 no-underline"
+    style={`--accent: ${siteConfig.accentColor}`}
+    title={`Switch to ${ui[nextLang].lang.label}`}
+  >
+    {t.switchTo}
+  </a>
+</div>
+
+<style>
+  .lang-btn {
+    color: var(--accent);
+    border: 1px solid color-mix(in srgb, var(--accent) 25%, transparent);
+    background: color-mix(in srgb, var(--accent) 3%, transparent);
+  }
+  .lang-btn:hover {
+    background: color-mix(in srgb, var(--accent) 13%, transparent);
+  }
+</style>
