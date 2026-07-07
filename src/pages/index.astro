@@ -7,7 +7,7 @@
   <script>
     const stored = localStorage.getItem("lang");
     const lang = (stored === "zh") ? "zh" : "en";
-    window.location.replace("/" + lang + "/");
+    window.location.replace(window.location.origin + "/elwina/" + lang + "/");
   </script>
 </head>
 <body></body>
