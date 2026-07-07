@@ -18,4 +18,4 @@ Hobbyist developer focused on physics/geography education. Broad interests, alwa
 - Outlook: [elwina_vardal@outlook.com](mailto:elwina_vardal@outlook.com)
 - 国内: [elwina@yeah.net](mailto:elwina@yeah.net)
 - GitHub: [@elwina](https://github.com/elwina)
-- QQ群: [加入](https://qm.qq.com/q/X5kcdAboEE)
+- QQ: [加入](https://qm.qq.com/q/X5kcdAboEE)
